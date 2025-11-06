@@ -2,7 +2,7 @@
 
 import { ArgumentParser, FileType } from 'argparse'
 
-import { run } from './brave-client-crawl/crawl.js'
+import { run as runCrawl } from './brave-client-crawl/crawl.js'
 import * as defaults from './brave-client-crawl/defaults.js'
 import { make as makeLogger } from './brave-client-crawl/logger.js'
 import { checkWorkArgs } from './brave-client-crawl/validate.js'
@@ -56,4 +56,9 @@ if (!checkWorkArgs(workDesc)) {
 }
 
 logger.info(workDesc)
-await run(workDesc.binaryPath, workDesc.userDataDir, workDesc.profile, workDesc.urls, logger)
+const work = await runCrawl(workDesc.binaryPath, workDesc.userDataDir,
+  workDesc.profile, workDesc.urls, logger)
+
+logger.info('Crawl results recorded at ', work.path)
+const zipPath = await work.zip()
+logger.info('Zipped results as ', zipPath)

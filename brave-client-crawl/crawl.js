@@ -46,6 +46,7 @@ const crawlUrl = (browser, url, logger) => {
         logger.verbose(resultText)
 
         numResults += 1
+        results[resultName] = resultText
         if (totalResults === numResults) {
           await page.close()
           resolve(results)
@@ -62,7 +63,7 @@ const crawlUrl = (browser, url, logger) => {
       })
 
       const request = await page.goto(url)
-      await addResultAndResolveIfComplete('response', request.text())
+      await addResultAndResolveIfComplete('response', await request.text())
     } catch (error) {
       logger.error(error)
       try {
@@ -83,11 +84,14 @@ const run = async (binaryPath, userDataDirPath, profileName, urls, logger) => {
     const resultsForUrl = await crawlUrl(browser, aUrl, logger)
 
     logger.info('About to add crawl results to workspace')
+    console.log(resultsForUrl)
     await workspace.addResultsForUrl(aUrl, resultsForUrl)
   }
 
   logger.info('Crawling complete')
   await browser.close()
+
+  return workspace
 }
 
 export {

@@ -3,7 +3,7 @@ import { createWriteStream } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
-import { ZipArchive } from 'archiver'
+import archiver from 'archiver'
 
 const _makeWorkspaceDir = async _ => {
   return await mkdtemp(join(tmpdir(), 'brave-client-crawl-'))
@@ -25,7 +25,7 @@ const _workspaceAsZip = (workspacePath) => {
     const tempZipPath = join(tmpdir(), 'brave-client-crawl.zip')
     const outputStream = createWriteStream(tempZipPath)
 
-    const archive = new ZipArchive({
+    const archive = archiver('zip', {
       zlib: { level: 9 }
     })
 
@@ -47,7 +47,7 @@ const makeWorkspace = async () => {
   const dirPath = await _makeWorkspaceDir()
   return {
     path: dirPath,
-    asZip: async () => {
+    zip: async () => {
       return await _workspaceAsZip(dirPath)
     },
     delete: async () => {
