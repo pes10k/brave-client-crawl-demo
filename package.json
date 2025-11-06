@@ -1,0 +1,20 @@
+{
+  "name": "brave-client-crawl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "indrunex.js",
+  "scripts": {
+    "lint": "npx standard",
+    "lint:fix": "npx standard --fix"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "argparse": "^2.0.1",
+    "puppeteer-core": "^24.28.0"
+  },
+  "type": "module",
+  "devDependencies": {
+    "standard": "^17.1.2"
+  }
+}
