@@ -84,7 +84,6 @@ const run = async (binaryPath, userDataDirPath, profileName, urls, logger) => {
     const resultsForUrl = await crawlUrl(browser, aUrl, logger)
 
     logger.info('About to add crawl results to workspace')
-    console.log(resultsForUrl)
     await workspace.addResultsForUrl(aUrl, resultsForUrl)
   }
 
