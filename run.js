@@ -2,7 +2,7 @@
 
 import { ArgumentParser, FileType } from 'argparse'
 
-import { crawlUrls } from './brave-client-crawl/crawl.js'
+import { run } from './brave-client-crawl/crawl.js'
 import * as defaults from './brave-client-crawl/defaults.js'
 import { make as makeLogger } from './brave-client-crawl/logger.js'
 import { checkWorkArgs } from './brave-client-crawl/validate.js'
@@ -51,6 +51,9 @@ const workDesc = {
   profile: args.profile
 }
 
-if (checkWorkArgs(workDesc)) {
-  logger.info(workDesc)
+if (!checkWorkArgs(workDesc)) {
+  process.exit(1)
 }
+
+logger.info(workDesc)
+await run(workDesc.binaryPath, workDesc.userDataDir, workDesc.profile, workDesc.urls, logger)
