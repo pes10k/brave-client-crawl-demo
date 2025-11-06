@@ -55,7 +55,7 @@ if (!checkWorkArgs(workDesc)) {
   process.exit(1)
 }
 
-logger.info(workDesc)
+logger.info('Running with configuration: ', workDesc)
 const work = await runCrawl(workDesc.binaryPath, workDesc.userDataDir,
   workDesc.profile, workDesc.urls, logger)
 

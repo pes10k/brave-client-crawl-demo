@@ -19,7 +19,8 @@ const launchPuppeteer = async (binaryPath, userDataDirPath, profile, logger) => 
     enableExtensions: true,
     executablePath: binaryPath,
     dumpio: isVerboseLogging,
-    args: chromeArgs
+    args: chromeArgs,
+    defaultViewport: null
   }
 
   logger.info('Launching puppeteer with the following launch options:')
@@ -82,8 +83,6 @@ const run = async (binaryPath, userDataDirPath, profileName, urls, logger) => {
   for (const aUrl of urls) {
     logger.info(`About to crawl ${aUrl}`)
     const resultsForUrl = await crawlUrl(browser, aUrl, logger)
-
-    logger.info('About to add crawl results to workspace')
     await workspace.addResultsForUrl(aUrl, resultsForUrl)
   }
 

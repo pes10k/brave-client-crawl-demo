@@ -5,7 +5,9 @@ import { canExecPath, canReadDirAtPath } from './validate.js'
 const userHomeDirPath = homedir()
 const constants = {
   urls: [
-    'https://www.peteresnyder.com'
+    'https://www.peteresnyder.com',
+    'https://arstechnica.com/science/2025/11/imaging-black-holes-may-help-us-rule-out-some-models-of-gravity/',
+    'https://www.nytimes.com/2025/11/06/business/elon-musk-tesla-pay-vote.html'
   ]
 }
 
